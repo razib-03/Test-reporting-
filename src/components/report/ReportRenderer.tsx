@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import type { ReactNode } from 'react';
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
@@ -102,7 +103,7 @@ function TableReport({ report }: { report: ReportType }) {
               const pctp = rows.reduce((s, r) => s + r.pctPortfolio, 0);
               grandMV += mv; grandBook += book; grandUGL += ugl;
               return (
-                <tbody key={cls} className="contents">
+                <Fragment key={cls}>
                   <tr className="border-b border-[#f0f2f4] bg-[#f8f9fa]/60">
                     <Td className="font-semibold">{cls}</Td>
                     <td colSpan={full ? 8 : 4} />
@@ -134,7 +135,7 @@ function TableReport({ report }: { report: ReportType }) {
                     {full && <td />}
                     <Td align="right">{pctp.toFixed(1)}%</Td>
                   </tr>
-                </tbody>
+                </Fragment>
               );
             })}
             <tr className="border-t-2 border-[#0645ad] bg-[#eef3fb] font-semibold text-[#0645ad]">
@@ -180,7 +181,7 @@ function AccountDetailsTable({ withPeriodChange }: { withPeriodChange: boolean }
             const subPrior = accts.reduce((s, a) => s + a.priorMarketValue, 0);
             grand += sub; grandPrior += subPrior;
             return (
-              <tbody key={m.name} className="contents">
+              <Fragment key={m.name}>
                 <tr className="border-b border-[#f0f2f4] bg-[#f8f9fa]/60">
                   <Td className="font-semibold">{m.name}</Td>
                   <td colSpan={withPeriodChange ? 6 : 5} />
@@ -202,7 +203,7 @@ function AccountDetailsTable({ withPeriodChange }: { withPeriodChange: boolean }
                   {withPeriodChange && <Td align="right">{formatCurrency(subPrior)}</Td>}
                   <Td align="right">{formatCurrency(sub)}</Td>
                 </tr>
-              </tbody>
+              </Fragment>
             );
           })}
           <tr className="border-t-2 border-[#0645ad] bg-[#eef3fb] font-semibold text-[#0645ad]">
@@ -240,7 +241,7 @@ function PrivateEquityTable() {
             {currencies.map((ccy) => {
               const rows = privateEquity.filter((p) => p.currency === ccy);
               return (
-                <tbody key={ccy} className="contents">
+                <Fragment key={ccy}>
                   <tr className="border-b border-[#f0f2f4] bg-[#f8f9fa]/60">
                     <Td className="font-semibold">{ccy} Denominated</Td>
                     <td colSpan={7} />
@@ -257,7 +258,7 @@ function PrivateEquityTable() {
                       <Td align="right" className={signClass(p.irr)}>{p.irr.toFixed(1)}%</Td>
                     </tr>
                   ))}
-                </tbody>
+                </Fragment>
               );
             })}
             <tr className="border-t-2 border-[#0645ad] bg-[#eef3fb] font-semibold text-[#0645ad]">
@@ -349,7 +350,7 @@ function NetWorthReport({ estate }: { estate: boolean }) {
           </thead>
           <tbody>
             {netWorthSections.map((section) => (
-              <tbody key={section.title} className="contents">
+              <Fragment key={section.title}>
                 <tr className="border-b border-[#f0f2f4] bg-[#f8f9fa]/60">
                   <Td className="font-semibold">{section.title}</Td>
                   <td colSpan={4} />
@@ -361,10 +362,10 @@ function NetWorthReport({ estate }: { estate: boolean }) {
                     <Td align="right" className={cn(signClass(rowTotal(r)), r.isSubtotal && 'font-semibold')}>{formatCurrency(rowTotal(r))}</Td>
                   </tr>
                 ))}
-              </tbody>
+              </Fragment>
             ))}
             {estate && (
-              <tbody className="contents">
+              <Fragment>
                 <tr className="border-b border-[#f0f2f4] bg-[#f8f9fa]/60">
                   <Td className="font-semibold">Insurance</Td>
                   <td colSpan={4} />
@@ -376,7 +377,7 @@ function NetWorthReport({ estate }: { estate: boolean }) {
                     <Td align="right">{formatCurrency(rowTotal(r))}</Td>
                   </tr>
                 ))}
-              </tbody>
+              </Fragment>
             )}
             <tr className="border-t-2 border-[#0645ad] bg-[#eef3fb] font-semibold text-[#0645ad]">
               <Td className="font-semibold text-[#0645ad]">Net Worth</Td>
@@ -629,7 +630,7 @@ function ForeignPropertyReport() {
           </thead>
           <tbody>
             {countries.map((country) => (
-              <tbody key={country} className="contents">
+              <Fragment key={country}>
                 <tr className="border-b border-[#f0f2f4] bg-[#f8f9fa]/60">
                   <Td className="font-semibold">{country}</Td>
                   <td colSpan={15} />
@@ -643,7 +644,7 @@ function ForeignPropertyReport() {
                     <Td align="right">{formatCurrency(f.yearEnd)}</Td>
                   </tr>
                 ))}
-              </tbody>
+              </Fragment>
             ))}
           </tbody>
         </table>
@@ -678,7 +679,7 @@ function AllocationReport() {
             </thead>
             <tbody>
               {assetAllocation.map((g) => (
-                <tbody key={g.name} className="contents">
+                <Fragment key={g.name}>
                   <tr className="border-b border-[#f0f2f4]">
                     <Td><span className="mr-2 inline-block h-2.5 w-2.5 rounded-full align-middle" style={{ background: g.color }} /><span className="font-medium">{g.name}</span></Td>
                     <Td align="right" className="font-medium">{formatCurrency(g.marketValue)}</Td>
@@ -691,7 +692,7 @@ function AllocationReport() {
                       <Td align="right" className="text-[#657381]">{s.pct.toFixed(1)}%</Td>
                     </tr>
                   ))}
-                </tbody>
+                </Fragment>
               ))}
               <tr className="border-t-2 border-[#0645ad] bg-[#eef3fb] font-semibold text-[#0645ad]">
                 <Td className="font-semibold text-[#0645ad]">Total</Td>
