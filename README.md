@@ -1,6 +1,6 @@
 # Reporting · by Purpose
 
-An advisor-facing reporting application modeled on the **d1g1t reporting catalog** — the full set of 21 report types across 8 categories, plus the two-step *configure template → generate report* workflow.
+An advisor-facing reporting application modeled on the **d1g1t reporting catalog** — the full set of 25 report types across 8 categories, plus the two-step *configure template → generate report* workflow.
 
 ## Stack
 
@@ -24,7 +24,7 @@ npm run preview  # serve the production build
 | Route | Page |
 |---|---|
 | `/` | **Dashboard** — metrics, recent reports, category grid, quick actions |
-| `/library` | **Report Library** — browse all 21 report types, search + category filters |
+| `/library` | **Report Library** — browse all 25 report types, search + category filters |
 | `/library/:reportId` | **Report Viewer** — metadata + rendered sample report (charts + tables) |
 | `/templates` | **Templates** — saved report templates |
 | `/templates/new`, `/templates/:id` | **Template Builder** — Step 1: configure a template |
