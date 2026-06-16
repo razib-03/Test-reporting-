@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 
 function getPageTitle(pathname: string): string {
   if (pathname === '/') return 'Dashboard';
+  if (pathname.startsWith('/create')) return 'Create with AI';
   if (pathname.startsWith('/library/')) return 'Report';
   if (pathname.startsWith('/library')) return 'Report Library';
   if (pathname.startsWith('/templates')) return 'Templates';

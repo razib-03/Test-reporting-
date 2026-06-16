@@ -5,6 +5,7 @@ import {
   Library,
   FileText,
   FilePlus,
+  Sparkles,
   HelpCircle,
   ChevronLeft,
   ChevronRight,
@@ -18,10 +19,12 @@ type NavItem = {
   icon: React.ReactNode;
   path: string;
   exact?: boolean;
+  badge?: string;
 };
 
 const items: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} />, path: '/', exact: true },
+  { id: 'create', label: 'Create with AI', icon: <Sparkles size={18} />, path: '/create', badge: 'AI' },
   { id: 'library', label: 'Report Library', icon: <Library size={18} />, path: '/library' },
   { id: 'templates', label: 'Templates', icon: <FileText size={18} />, path: '/templates' },
   { id: 'generate', label: 'Generate Report', icon: <FilePlus size={18} />, path: '/generate' },
@@ -76,6 +79,11 @@ export default function Sidebar() {
             >
               <div className="shrink-0">{item.icon}</div>
               {!isCollapsed && <span className="text-sm flex-1">{item.label}</span>}
+              {!isCollapsed && item.badge && (
+                <span className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700">
+                  {item.badge}
+                </span>
+              )}
             </button>
           ))}
         </nav>

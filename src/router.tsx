@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import AppLayout from '@/components/layout/AppLayout';
 import DashboardPage from '@/pages/DashboardPage';
+import CreateWithAIPage from '@/pages/CreateWithAIPage';
 import LibraryPage from '@/pages/LibraryPage';
 import ReportViewerPage from '@/pages/ReportViewerPage';
 import TemplatesPage from '@/pages/TemplatesPage';
@@ -14,6 +15,7 @@ export const router = createBrowserRouter(
     element: <AppLayout />,
     children: [
       { index: true, element: <DashboardPage /> },
+      { path: 'create', element: <CreateWithAIPage /> },
       { path: 'library', element: <LibraryPage /> },
       { path: 'library/:reportId', element: <ReportViewerPage /> },
       { path: 'templates', element: <TemplatesPage /> },

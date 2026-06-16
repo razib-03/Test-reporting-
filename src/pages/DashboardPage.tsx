@@ -79,10 +79,10 @@ export default function DashboardPage() {
             <FilePlus2 size={15} /> New template
           </Link>
           <Link
-            to="/generate"
+            to="/create"
             className="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-lg bg-[#0645ad] text-white hover:bg-[#053a8f] transition-colors"
           >
-            <Sparkles size={15} /> Generate report
+            <Sparkles size={15} /> Create with AI
           </Link>
         </div>
       </div>
@@ -137,6 +137,17 @@ export default function DashboardPage() {
         <div className="bg-white border border-[#e9ecef] rounded-xl p-5">
           <h2 className="text-sm font-semibold text-[#2e3338] mb-3">Quick actions</h2>
           <div className="space-y-2">
+            <Link
+              to="/create"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-violet-200 bg-violet-50 hover:border-violet-400 transition-colors group"
+            >
+              <Sparkles size={16} className="text-violet-600" />
+              <div className="flex-1">
+                <p className="text-sm font-medium text-[#2e3338]">Create with AI</p>
+                <p className="text-xs text-[#657381]">Describe a report in plain language</p>
+              </div>
+              <ChevronRight size={15} className="text-violet-300 group-hover:text-violet-600" />
+            </Link>
             <Link
               to="/generate"
               className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-[#e9ecef] hover:border-[#0645ad] hover:bg-[#f5f8fe] transition-colors group"
