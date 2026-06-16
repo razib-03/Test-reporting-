@@ -7,7 +7,8 @@ import TemplatesPage from '@/pages/TemplatesPage';
 import TemplateBuilderPage from '@/pages/TemplateBuilderPage';
 import GeneratePage from '@/pages/GeneratePage';
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
   {
     path: '/',
     element: <AppLayout />,
@@ -21,4 +22,6 @@ export const router = createBrowserRouter([
       { path: 'generate', element: <GeneratePage /> },
     ],
   },
-]);
+  ],
+  { basename: import.meta.env.BASE_URL }
+);

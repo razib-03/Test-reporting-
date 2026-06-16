@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230645ad'/%3E%3Cg fill='white'%3E%3Crect x='26' y='52' width='12' height='26' rx='2'/%3E%3Crect x='44' y='38' width='12' height='40' rx='2'/%3E%3Crect x='62' y='26' width='12' height='52' rx='2'/%3E%3C/g%3E%3C/svg%3E" />
     <title>Reporting · by Purpose</title>
+    <script>
+      // GitHub Pages SPA redirect — restore the real path stashed by 404.html
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
   </head>
   <body>
     <div id="root"></div>
