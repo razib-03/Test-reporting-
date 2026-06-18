@@ -68,3 +68,24 @@ export const advisors = [
   { id: 'u1', name: 'Sarah Mitchell', title: 'Senior Wealth Advisor' },
   { id: 'u2', name: 'James Chen', title: 'Associate Advisor' },
 ];
+
+/** A client/household in the advisor's book — used to apply a template to many at once. */
+export interface Client {
+  id: string;
+  name: string;
+  advisor: string;
+  kind: 'household' | 'individual';
+  aum: number;
+}
+
+/** The advisor's book of business (Okafor is the household reports render against). */
+export const clients: Client[] = [
+  { id: household.id, name: household.name, advisor: 'Sarah Mitchell', kind: 'household', aum: totalMarketValue },
+  { id: 'hh-tremblay', name: 'Tremblay Family Household', advisor: 'Sarah Mitchell', kind: 'household', aum: 3120400 },
+  { id: 'hh-nakamura', name: 'Nakamura Household', advisor: 'Sarah Mitchell', kind: 'household', aum: 1894250 },
+  { id: 'ind-okonkwo', name: 'Grace Okonkwo', advisor: 'Sarah Mitchell', kind: 'individual', aum: 742900 },
+  { id: 'hh-rossi', name: 'Rossi Family Trust', advisor: 'James Chen', kind: 'household', aum: 5410000 },
+  { id: 'ind-patel', name: 'Anil Patel', advisor: 'James Chen', kind: 'individual', aum: 988600 },
+  { id: 'hh-lefebvre', name: 'Lefebvre Household', advisor: 'James Chen', kind: 'household', aum: 2267300 },
+  { id: 'ind-osei', name: 'Kwame Osei', advisor: 'Sarah Mitchell', kind: 'individual', aum: 531200 },
+];

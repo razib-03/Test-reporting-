@@ -64,6 +64,10 @@ export interface SavedTemplate {
   sections: string[];
   documentVault: boolean;
   updatedAt: string; // ISO date
+  /** Firm-standard (admin-published, locked) vs an advisor's own template. */
+  scope: 'firm' | 'advisor';
+  /** Who owns it — an advisor name, or "Compliance" for firm templates. */
+  owner?: string;
 }
 
 export interface GeneratedReport {

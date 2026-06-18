@@ -181,6 +181,8 @@ export function draftToTemplate(draft: ReportConfigDraft): SavedTemplate {
     sections: draft.sections,
     documentVault: draft.documentVault,
     updatedAt: new Date().toISOString().slice(0, 10),
+    scope: 'advisor',
+    owner: draft.preparedBy[0] ?? advisors[0].name,
   };
 }
 

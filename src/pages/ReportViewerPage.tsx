@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { ArrowLeft, Download, FileText, Info, Calendar, Layers } from 'lucide-react';
-import { getReport, getCategory } from '@/data/reportCatalog';
+import { getReport, getCategory, benchmarkSiblingOf } from '@/data/reportCatalog';
 import { cn } from '@/lib/utils';
 import ReportShell from '@/components/report/ReportShell';
 import ReportRenderer from '@/components/report/ReportRenderer';
@@ -12,6 +12,7 @@ export default function ReportViewerPage() {
   const { reportId } = useParams();
   const report = reportId ? getReport(reportId) : undefined;
   const [variant, setVariant] = useState(0);
+  const [benchmark, setBenchmark] = useState(false);
 
   if (!report) {
     return (
@@ -27,6 +28,8 @@ export default function ReportViewerPage() {
   }
 
   const category = getCategory(report.category);
+  const siblingId = benchmarkSiblingOf(report.id);
+  const effectiveReport = benchmark && siblingId ? getReport(siblingId)! : report;
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-6">
@@ -51,7 +54,7 @@ export default function ReportViewerPage() {
       </div>
 
       {/* Metadata panel */}
-      <div className="mt-5 grid gap-4 lg:grid-cols-3">
+      <div className="mt-5 grid gap-4 lg:grid-cols-2">
         <div className="rounded-xl border border-[#e9ecef] bg-white p-4">
           <div className="mb-2 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wide text-[#657381]">
             <Info size={14} /> How it’s created
@@ -72,12 +75,38 @@ export default function ReportViewerPage() {
             ))}
           </div>
         </div>
-
-        <div className="rounded-xl border border-[#e9ecef] bg-white p-4">
-          <div className="mb-2 text-[12px] font-semibold uppercase tracking-wide text-[#657381]">Output</div>
-          <p className="text-[13px] leading-relaxed text-[#657381]">{report.output}</p>
-        </div>
       </div>
+
+      {/* Benchmark toggle (Return reports) */}
+      {siblingId && (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <span className="text-[12px] font-medium text-[#657381]">Benchmark:</span>
+          <button
+            onClick={() => setBenchmark((b) => !b)}
+            className={cn(
+              'inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[13px] font-medium transition-colors',
+              benchmark
+                ? 'border-[#0645ad] bg-[#0645ad] text-white'
+                : 'border-[#e9ecef] bg-white text-[#657381] hover:border-[#0645ad] hover:text-[#0645ad]'
+            )}
+          >
+            <span
+              className={cn(
+                'inline-block h-3.5 w-6 rounded-full transition-colors',
+                benchmark ? 'bg-white/40' : 'bg-[#cbd2d9]'
+              )}
+            >
+              <span
+                className={cn(
+                  'block h-3.5 w-3.5 rounded-full bg-white shadow transition-transform',
+                  benchmark && 'translate-x-2.5'
+                )}
+              />
+            </span>
+            {benchmark ? 'Included' : 'Include benchmark'}
+          </button>
+        </div>
+      )}
 
       {/* Variants */}
       {report.variants.length > 1 && (
@@ -102,8 +131,8 @@ export default function ReportViewerPage() {
 
       {/* Rendered report */}
       <div className="mt-5">
-        <ReportShell title={report.name} asOfDate={AS_OF}>
-          <ReportRenderer report={report} />
+        <ReportShell title={`${report.name}${benchmark && siblingId ? ' (with benchmark)' : ''}`} asOfDate={AS_OF}>
+          <ReportRenderer report={effectiveReport} />
         </ReportShell>
       </div>
     </div>

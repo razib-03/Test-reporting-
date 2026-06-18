@@ -1,5 +1,5 @@
 import { Download, Save, Check, Loader2, FileSearch } from 'lucide-react';
-import { reports, categories, getReport } from '@/data/reportCatalog';
+import { libraryReports, categories, getReport, baseReportId, benchmarkSiblingOf } from '@/data/reportCatalog';
 import { household, contacts, advisors } from '@/data/clients';
 import { PERIODS, CURRENCIES } from '@/agent/constants';
 import type { ReportConfigDraft } from '@/agent/types';
@@ -38,6 +38,9 @@ export default function ConfigPreview({
   onSaveTemplate,
 }: ConfigPreviewProps) {
   const report = draft.reportTypeId ? getReport(draft.reportTypeId) : undefined;
+  const baseId = baseReportId(draft.reportTypeId ?? '');
+  const benchmarkSibling = benchmarkSiblingOf(baseId);
+  const benchmarkOn = !!benchmarkSibling && draft.reportTypeId === benchmarkSibling;
 
   const toggleAccount = (id: string) => {
     const accounts = draft.accounts.includes(id)
@@ -78,7 +81,7 @@ export default function ConfigPreview({
         <div className="divide-y divide-[#f5f6f8]">
           <Row label="Report">
             <select
-              value={draft.reportTypeId ?? ''}
+              value={baseId}
               onChange={(e) => onChange({ reportTypeId: e.target.value })}
               className={selectCls}
             >
@@ -87,7 +90,7 @@ export default function ConfigPreview({
               </option>
               {categories.map((cat) => (
                 <optgroup key={cat.id} label={`${cat.index}. ${cat.name}`}>
-                  {reports
+                  {libraryReports
                     .filter((r) => r.category === cat.id)
                     .map((r) => (
                       <option key={r.id} value={r.id}>
@@ -98,6 +101,20 @@ export default function ConfigPreview({
               ))}
             </select>
           </Row>
+
+          {benchmarkSibling && (
+            <Row label="Benchmark">
+              <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-[#2e3338]">
+                <input
+                  type="checkbox"
+                  checked={benchmarkOn}
+                  onChange={(e) => onChange({ reportTypeId: e.target.checked ? benchmarkSibling : baseId })}
+                  className="h-3.5 w-3.5 rounded border-[#cbd2d9] text-[#0645ad]"
+                />
+                {benchmarkOn ? 'Included' : 'Include benchmark comparison'}
+              </label>
+            </Row>
+          )}
 
           {report?.periodBased && (
             <Row label="Period">

@@ -340,3 +340,31 @@ export const reportsByCategory = (categoryId: string) =>
 export const getReport = (id: string) => reports.find((r) => r.id === id);
 
 export const getCategory = (id: string) => categories.find((c) => c.id === id);
+
+/**
+ * Reports whose benchmark comparison is an optional config toggle rather than a
+ * separate library item. Maps the base report id → its `-benchmarks` variant.
+ */
+export const benchmarkPairs: Record<string, string> = {
+  'trailing-returns': 'trailing-returns-benchmarks',
+  'return-calendar-year': 'return-calendar-year-benchmarks',
+};
+
+const benchmarkVariantIds = new Set(Object.values(benchmarkPairs));
+
+/** Map a `-benchmarks` variant id back to its base; identity for everything else. */
+export const baseReportId = (id: string): string => {
+  for (const [base, variant] of Object.entries(benchmarkPairs)) {
+    if (variant === id) return base;
+  }
+  return id;
+};
+
+/** The benchmark variant id for a base report, or undefined if none exists. */
+export const benchmarkSiblingOf = (id: string): string | undefined => benchmarkPairs[id];
+
+/** Whether an id is a benchmark variant that's folded into its base item. */
+export const isBenchmarkVariant = (id: string): boolean => benchmarkVariantIds.has(id);
+
+/** Reports shown in listing surfaces — benchmark variants are folded into their base. */
+export const libraryReports = reports.filter((r) => !benchmarkVariantIds.has(r.id));

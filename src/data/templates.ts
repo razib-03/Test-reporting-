@@ -1,6 +1,39 @@
 import type { SavedTemplate, GeneratedReport } from './types';
 
 export const savedTemplates: SavedTemplate[] = [
+  // ── Firm-standard templates (published by Compliance, locked) ────────────
+  {
+    id: 'tpl-firm-001',
+    title: 'Firm Standard — Quarterly Portfolio Review',
+    reportTypeId: 'portfolio-overview',
+    accounts: 'Per client',
+    preparedFor: 'Client',
+    preparedBy: ['Advisor'],
+    reportingCurrency: 'CAD',
+    period: 'QTD',
+    sections: ['Performance Graph', 'Trailing Returns', 'Portfolio Activity'],
+    documentVault: true,
+    updatedAt: '2026-04-01',
+    scope: 'firm',
+    owner: 'Compliance',
+  },
+  {
+    id: 'tpl-firm-002',
+    title: 'Firm Standard — CRM2 Annual Disclosure',
+    reportTypeId: 'crm2',
+    accounts: 'Per client',
+    preparedFor: 'Client',
+    preparedBy: ['Advisor'],
+    reportingCurrency: 'CAD',
+    period: '1Y',
+    sections: ['Charges & Compensation', 'Investment Performance'],
+    documentVault: true,
+    updatedAt: '2026-01-02',
+    scope: 'firm',
+    owner: 'Compliance',
+  },
+
+  // ── Advisor templates ───────────────────────────────────────────────────
   {
     id: 'tpl-001',
     title: 'Okafor — Quarterly Portfolio Review',
@@ -13,6 +46,8 @@ export const savedTemplates: SavedTemplate[] = [
     sections: ['Performance Graph', 'Trailing Returns', 'Portfolio Activity'],
     documentVault: true,
     updatedAt: '2026-06-10',
+    scope: 'advisor',
+    owner: 'Sarah Mitchell',
   },
   {
     id: 'tpl-002',
@@ -25,6 +60,8 @@ export const savedTemplates: SavedTemplate[] = [
     sections: ['Assets', 'Liabilities', 'Net Worth Summary'],
     documentVault: true,
     updatedAt: '2026-05-28',
+    scope: 'advisor',
+    owner: 'Sarah Mitchell',
   },
   {
     id: 'tpl-003',
@@ -38,6 +75,8 @@ export const savedTemplates: SavedTemplate[] = [
     sections: ['Charges & Compensation', 'Investment Performance'],
     documentVault: true,
     updatedAt: '2026-01-15',
+    scope: 'advisor',
+    owner: 'Sarah Mitchell',
   },
   {
     id: 'tpl-004',
@@ -50,6 +89,8 @@ export const savedTemplates: SavedTemplate[] = [
     sections: ['Guidelines Table', 'Range Chart'],
     documentVault: false,
     updatedAt: '2026-06-01',
+    scope: 'advisor',
+    owner: 'James Chen',
   },
   {
     id: 'tpl-005',
@@ -62,6 +103,8 @@ export const savedTemplates: SavedTemplate[] = [
     sections: ['Holdings by Asset Class'],
     documentVault: false,
     updatedAt: '2026-06-12',
+    scope: 'advisor',
+    owner: 'Sarah Mitchell',
   },
   {
     id: 'tpl-006',
@@ -75,6 +118,8 @@ export const savedTemplates: SavedTemplate[] = [
     sections: ['Month-End Book Values', 'Summary of Accounts'],
     documentVault: true,
     updatedAt: '2026-02-20',
+    scope: 'advisor',
+    owner: 'Sarah Mitchell',
   },
   {
     id: 'tpl-007',
@@ -87,6 +132,8 @@ export const savedTemplates: SavedTemplate[] = [
     sections: ['Returns Grid', 'Benchmark Comparison'],
     documentVault: false,
     updatedAt: '2026-06-08',
+    scope: 'advisor',
+    owner: 'Sarah Mitchell',
   },
 ];
 
